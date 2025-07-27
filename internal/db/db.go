@@ -14,6 +14,10 @@ func OpenDB() *sql.DB {
 	if err != nil {
 		log.Fatal("❌ Failed to connect to DB:", err)
 	}
+	_, err = db.Exec("PRAGMA journal_mode = WAL;")
+	if err != nil {
+		log.Fatal("❌ Failed to enable WAL mode:", err)
+	}
 	if err := db.Ping(); err != nil {
 		log.Fatal("❌ Database unreachable:", err)
 	}
