@@ -9,15 +9,20 @@ import (
 	"github.com/boiddutik/go_htmx/crud_app/internal/routes"
 )
 
-func main() {
-	db.InitDB()
-	defer db.DB.Close()
-	log.Println("✅ Connected to SQLite database.")
+var tmpl *template.Template
 
-	tmpl := template.Must(template.ParseGlob("ui/templates/*.html"))
+func init() {
+	db.OpenDB()
+	tmpl = template.Must(template.ParseGlob("ui/templates/*.html"))
+	log.Println("✅ DB initialized and templates parsed")
+}
+
+func main() {
+	defer db.DB.Close()
 
 	mux := http.NewServeMux()
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("ui/static"))))
+
 	routes.SetupRoutes(mux, tmpl)
 
 	log.Println("🚀 Server running at http://localhost:8000")

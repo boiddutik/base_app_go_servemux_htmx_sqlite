@@ -17,9 +17,6 @@ func OpenDB() *sql.DB {
 	if err := db.Ping(); err != nil {
 		log.Fatal("❌ Database unreachable:", err)
 	}
+	DB = db
 	return db
-}
-
-func InitDB() {
-	DB = OpenDB()
 }
