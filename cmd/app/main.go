@@ -23,3 +23,5 @@ func main() {
 	log.Println("🚀 Server running at http://localhost:8000")
 	log.Fatal(http.ListenAndServe(":8000", mux))
 }
+
+// go get modernc.org/sqlite
