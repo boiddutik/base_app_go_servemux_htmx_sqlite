@@ -1,0 +1,25 @@
+package db
+
+import (
+	"database/sql"
+	"log"
+
+	_ "modernc.org/sqlite"
+)
+
+var DB *sql.DB
+
+func OpenDB() *sql.DB {
+	db, err := sql.Open("sqlite", "api.db?_pragma=foreign_keys(1)")
+	if err != nil {
+		log.Fatal("❌ Failed to connect to DB:", err)
+	}
+	if err := db.Ping(); err != nil {
+		log.Fatal("❌ Database unreachable:", err)
+	}
+	return db
+}
+
+func InitDB() {
+	DB = OpenDB()
+}
