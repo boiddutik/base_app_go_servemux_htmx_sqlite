@@ -1,9 +1,9 @@
 package main
 
 import (
+	"html/template"
 	"log"
 	"net/http"
-	"text/template"
 
 	"github.com/boiddutik/go_htmx/crud_app/internal/db"
 	"github.com/boiddutik/go_htmx/crud_app/internal/routes"

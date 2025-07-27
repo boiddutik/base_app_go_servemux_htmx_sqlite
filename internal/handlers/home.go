@@ -1,11 +1,11 @@
 package handlers
 
 import (
+	"html/template"
 	"net/http"
-	"text/template"
 )
 
-func MakeHomeHandler(tmpl *template.Template) http.HandlerFunc {
+func HomeHandler(tmpl *template.Template) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		err := tmpl.Execute(w, nil)
 		if err != nil {
